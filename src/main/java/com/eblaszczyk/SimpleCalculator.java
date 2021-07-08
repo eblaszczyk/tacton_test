@@ -4,8 +4,13 @@ import java.util.Stack;
 
 public class SimpleCalculator {
 
-  private String[] ops;
-  private String[] nums;
+  public static final String SUBTRACTION = "-";
+  public static final String MULTIPLICATION = "*";
+  public static final String DIVISION = "/";
+  public static final String REGEX_TO_CHECK_INPUT = "^-?\\d+( \\+|-|\\*|/ -?\\d+)*";
+
+  private String[] operations;
+  private String[] numbers;
 
   public int calculate(String input) {
 
@@ -28,20 +33,20 @@ public class SimpleCalculator {
 
   private int calculateExpression() {
     Stack<Integer> numsStack = new Stack<>();
-    numsStack.push(Integer.parseInt(nums[0]));
+    numsStack.push(Integer.parseInt(numbers[0]));
 
-    for (int i = 0; i < ops.length; i++) {
-      int curr = Integer.parseInt(nums[i + 1]);
+    for (int i = 0; i < operations.length; i++) {
+      int curr = Integer.parseInt(numbers[i + 1]);
 
-      if (ops[i].equals("*")) {
+      if (operations[i].equals(MULTIPLICATION)) {
         curr = numsStack.pop() * curr;
       }
 
-      if (ops[i].equals("/")) {
+      if (operations[i].equals(DIVISION)) {
         curr = numsStack.pop() / curr;
       }
 
-      if (ops[i].equals("-")) {
+      if (operations[i].equals(SUBTRACTION)) {
         curr = -curr;
       }
 
@@ -58,21 +63,21 @@ public class SimpleCalculator {
   }
 
   private void splitForNumsAndOps(String[] parts) {
-    ops = new String[parts.length / 2];
-    nums = new String[parts.length / 2 + 1];
+    operations = new String[parts.length / 2];
+    numbers = new String[parts.length / 2 + 1];
 
     for (int i = 0; i < parts.length; i++) {
       if (i % 2 != 0) {
-        ops[i / 2] = parts[i];
+        operations[i / 2] = parts[i];
       } else {
-        nums[i / 2] = parts[i];
+        numbers[i / 2] = parts[i];
       }
     }
   }
 
   private boolean checkIfInputIsCorrect(String input) {
     return input != null && !input.isEmpty()
-        && input.matches("^-?\\d+( (\\+|-|\\*|\\/) -?\\d+)*");
+        && input.matches(REGEX_TO_CHECK_INPUT);
   }
 
   public static void main(String[] args) {
