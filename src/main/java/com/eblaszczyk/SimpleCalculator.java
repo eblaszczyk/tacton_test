@@ -1,6 +1,5 @@
 package com.eblaszczyk;
 
-
 import java.util.Stack;
 
 public class SimpleCalculator {
