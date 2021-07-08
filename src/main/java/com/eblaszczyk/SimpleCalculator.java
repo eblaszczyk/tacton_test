@@ -7,7 +7,7 @@ public class SimpleCalculator {
   public static final String SUBTRACTION = "-";
   public static final String MULTIPLICATION = "*";
   public static final String DIVISION = "/";
-  public static final String REGEX_TO_CHECK_INPUT = "^-?\\d+( \\+|-|\\*|/ -?\\d+)*";
+  public static final String REGEX_TO_CHECK_INPUT = "^-?\\d+( (\\+|-|\\*|\\/) -?\\d+)*";
 
   private String[] operations;
   private String[] numbers;
